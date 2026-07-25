@@ -30,6 +30,8 @@ dist-ssr
 .env.local
 .env.development.local
 .env.test.local
+.env.production
+
 
 # Databases and Temp Files
 db_temp.json
