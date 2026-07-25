@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+
+const InstagramIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Link } from 'react-router-dom';
@@ -99,6 +107,17 @@ export const Navbar = () => {
             İletişim
             <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-[#01aca2] transition-all duration-300 group-hover:w-full"></span>
           </Link>
+
+          {data.general.socialLinks?.instagram && data.general.socialLinks.instagram.trim() !== '' && (
+            <a 
+              href={data.general.socialLinks.instagram} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="ml-4 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white hover:scale-110 transition-transform shadow-[0_0_15px_rgba(233,78,27,0.3)]"
+            >
+              <InstagramIcon size={20} />
+            </a>
+          )}
         </nav>
 
         {/* Mobile menu button placeholder */}

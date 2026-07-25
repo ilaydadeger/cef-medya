@@ -7,7 +7,7 @@ interface MediaRendererProps extends React.ImgHTMLAttributes<HTMLImageElement | 
 export const MediaRenderer: React.FC<MediaRendererProps> = ({ src, className, alt, ...props }) => {
   if (!src) return null;
 
-  const isVideo = src.match(/\.(mp4|webm|ogg)$/i) || src.includes('video');
+  const isVideo = src.match(/\.(mp4|webm|ogg|mov)$/i);
 
   if (isVideo) {
     return (

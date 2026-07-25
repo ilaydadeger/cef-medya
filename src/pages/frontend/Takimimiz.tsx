@@ -72,7 +72,7 @@ export default function Takimimiz() {
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="group cursor-default"
             >
-              <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-white/5 w-[85%] mx-auto">
+              <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-black w-[85%] mx-auto">
                 <div className="absolute inset-0 bg-cef-black/20 group-hover:bg-transparent transition-all duration-500 z-10" />
                 <MediaRenderer
                   src={member.image} 

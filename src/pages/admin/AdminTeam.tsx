@@ -92,7 +92,7 @@ export default function AdminTeam() {
   };
 
   const addMember = () => {
-    setTeamData(prev => [...prev, { name: 'Yeni Üye', role: 'Unvan', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800' }]);
+    setTeamData(prev => [...prev, { name: 'Yeni Üye', role: 'Unvan', image: '' }]);
   };
 
   const removeMember = (index: number) => {
@@ -177,10 +177,21 @@ export default function AdminTeam() {
                         <ImageIcon size={24} className="text-white/20" />
                       )}
                     </div>
-                    <label className="text-[10px] uppercase tracking-widest text-white/50 cursor-pointer text-center hover:text-cef-orange transition-colors">
-                      {uploadingField === `member${index}` ? 'Yükleniyor...' : 'Görsel Seç'}
-                      <input type="file" accept="image/*,video/mp4,video/webm" className="hidden" onChange={(e) => handleFileUpload(index, e)} disabled={uploadingField === `member${index}`} />
-                    </label>
+                    <div className="flex flex-col items-center gap-1">
+                      <label className="text-[10px] uppercase tracking-widest text-white/50 cursor-pointer text-center hover:text-cef-orange transition-colors">
+                        {uploadingField === `member${index}` ? 'Yükleniyor...' : 'Görsel Seç'}
+                        <input type="file" accept="image/*,video/mp4,video/webm" className="hidden" onChange={(e) => handleFileUpload(index, e)} disabled={uploadingField === `member${index}`} />
+                      </label>
+                      {member.image && (
+                        <button 
+                          type="button"
+                          onClick={() => handleMemberChange(index, 'image', '')}
+                          className="text-[10px] uppercase tracking-widest text-red-500/70 hover:text-red-500 transition-colors"
+                        >
+                          Kaldır
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex-1 grid gap-4">
