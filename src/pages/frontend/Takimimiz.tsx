@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { MediaRenderer } from '../../components/MediaRenderer';
 import { motion } from 'framer-motion';
 import { Navbar } from '../../components/Navbar';
@@ -5,6 +6,8 @@ import { Footer } from '../../components/Footer';
 import { useCms } from '../../context/CmsContext';
 
 export default function Takimimiz() {
+  useDocumentTitle('Ekibimiz');
+
   const { data } = useCms();
   const team = data.team;
 

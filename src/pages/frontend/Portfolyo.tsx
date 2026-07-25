@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { MediaRenderer } from '../../components/MediaRenderer';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +9,8 @@ import { Footer } from '../../components/Footer';
 import { useCms } from '../../context/CmsContext';
 
 export default function Portfolyo() {
+  useDocumentTitle('Portfolyo');
+
   const { data } = useCms();
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('Tümünü Gör');

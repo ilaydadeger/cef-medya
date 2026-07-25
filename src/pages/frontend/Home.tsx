@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Play, ArrowRight } from 'lucide-react';
@@ -403,6 +404,8 @@ const MarqueeStrip = () => {
 
 
 export default function Home() {
+  useDocumentTitle('Anasayfa');
+
   return (
     <div className="bg-[#0A0A0A] min-h-screen text-[#f4f2ee] selection:bg-[#e94e1b]/30 selection:text-white">
       <Navbar />

@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { MediaRenderer } from '../../components/MediaRenderer';
 import { motion } from 'framer-motion';
 import { 
@@ -20,6 +21,8 @@ import { Footer } from '../../components/Footer';
 import { useCms } from '../../context/CmsContext';
 
 export default function Hizmetler() {
+  useDocumentTitle('Hizmetler');
+
   const { data } = useCms();
   const ICONS = [BookOpen, Share2, Fingerprint, Camera, Package, Gift, Box, PenTool, Coffee, Cuboid, Film, Monitor];
   const servicesList = data.services.map((s, idx) => ({

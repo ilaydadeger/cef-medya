@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Send, User, AtSign, MessageSquare, Briefcase } from 'lucide-react';
 
@@ -23,6 +24,8 @@ import { useCms } from '../../context/CmsContext';
 import React, { useState } from 'react';
 
 export default function Iletisim() {
+  useDocumentTitle('İletişim');
+
   const { data } = useCms();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [privacy, setPrivacy] = useState(false);

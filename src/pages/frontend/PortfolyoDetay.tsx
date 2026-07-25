@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
@@ -7,6 +8,7 @@ import { useCms } from '../../context/CmsContext';
 import { motion } from 'framer-motion';
 
 export default function PortfolyoDetay() {
+
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { data } = useCms();
@@ -17,6 +19,8 @@ export default function PortfolyoDetay() {
     (p) => p.title.toLowerCase().replace(/\s+/g, '-') === decodedSlug ||
            p.title === decodedSlug
   );
+
+  useDocumentTitle(project?.title || "Portfolyo Detay");
 
   if (!project) {
     return (

@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
@@ -6,6 +7,8 @@ import { MediaRenderer } from '../../components/MediaRenderer';
 import { useCms } from '../../context/CmsContext';
 
 export default function Sss() {
+  useDocumentTitle('SSS');
+
   const navigate = useNavigate();
   const { data } = useCms();
 

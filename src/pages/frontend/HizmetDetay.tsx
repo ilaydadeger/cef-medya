@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
@@ -6,6 +7,7 @@ import { useCms } from '../../context/CmsContext';
 import { motion } from 'framer-motion';
 
 export default function HizmetDetay() {
+
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { data } = useCms();
@@ -16,6 +18,8 @@ export default function HizmetDetay() {
     (s) => s.title.toLowerCase().replace(/\s+/g, '-') === decodedSlug ||
            s.title === decodedSlug
   );
+
+  useDocumentTitle(service?.title || "Hizmet Detay");
 
   if (!service) {
     return (

@@ -139,7 +139,7 @@ export interface CmsData {
 
 export const defaultCmsData: CmsData = {
   general: {
-    siteTitle: 'Cef Medya | Yaratıcı Ajans',
+    siteTitle: 'Cef Medya',
     logoText: 'Cef Medya',
     faviconUrl: '',
     contact: {

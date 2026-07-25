@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { MediaRenderer } from '../../components/MediaRenderer';
 import { motion } from 'framer-motion';
 import { Camera, Film, MonitorPlay } from 'lucide-react';
@@ -6,6 +7,8 @@ import { Footer } from '../../components/Footer';
 import { useCms } from '../../context/CmsContext';
 
 export default function Hakkimizda() {
+  useDocumentTitle('Hakkımızda');
+
   const { data } = useCms();
   const partners = data.aboutPage?.brands?.map((b, i) => ({ ...b, id: i })) || [];
 
