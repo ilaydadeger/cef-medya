@@ -200,16 +200,8 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="py-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs text-[#f4f2ee]/30 font-light">
-          <p>© 2024 Cef Medya. Tüm hakları saklıdır.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-[#f4f2ee] transition-colors">
-              Gizlilik Politikası
-            </a>
-            <a href="#" className="hover:text-[#f4f2ee] transition-colors">
-              Kullanım Koşulları
-            </a>
-          </div>
+        <div className="py-6 border-t border-white/5 flex flex-col items-center justify-center text-xs text-[#f4f2ee]/30 font-light">
+          <p>© {new Date().getFullYear()} Cef Medya. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>

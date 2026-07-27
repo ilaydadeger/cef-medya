@@ -242,14 +242,6 @@ export default function Iletisim() {
                 >
                   <InstagramIcon size={20} strokeWidth={1.5} />
                 </a>
-                <a
-                  href={data.general.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-cef-turquoise transition-all duration-300"
-                >
-                  <LinkedinIcon size={20} strokeWidth={1.5} />
-                </a>
               </div>
             </div>
           </motion.div>

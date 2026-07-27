@@ -28,7 +28,7 @@ const HeroItem = ({
       initial={{ opacity: 0, x: initialPos.x, y: initialPos.y }}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="relative group overflow-hidden bg-[#0A0A0A] border border-white/5 flex items-center justify-center min-h-[50vh] md:min-h-0"
+      className="relative group overflow-hidden bg-[#0A0A0A] border border-white/5 flex items-center justify-center min-h-[35vh] sm:min-h-[40vh] md:min-h-0"
     >
       <div className="absolute inset-[-15%] opacity-70 group-hover:opacity-85 transition-opacity duration-1000">
         <MediaRenderer
@@ -78,7 +78,7 @@ const HeroItem = ({
 const Hero = () => {
   const { data } = useCms()
   return (
-    <section className="relative w-full h-screen min-h-[800px] pt-[80px] bg-[#0A0A0A] overflow-hidden">
+    <section className="relative w-full h-auto md:h-screen md:min-h-[800px] pt-[70px] md:pt-[80px] bg-[#0A0A0A] overflow-hidden">
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2">
         {data.home.heroItems.map((item, idx) => {
           const panDirs = ["right", "up", "down", "left"]

@@ -44,3 +44,10 @@ db_dump.json
 cpanel.env
 uploads/
 public/uploads/
+
+# Temp Zips and Scripts
+*.zip
+dump.php
+migrate.mjs
+create-zip.cjs
+local_data_dump.json

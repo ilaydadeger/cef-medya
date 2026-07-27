@@ -128,7 +128,11 @@ if ($action === 'upload' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         // PHP sunucusu kök dizinden çalıştığı için doğrudan /uploads/ çalışır.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
-        $baseUrl = $protocol . $host;
+        $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+        if ($scriptPath === '/' || $scriptPath === '\\') {
+            $scriptPath = '';
+        }
+        $baseUrl = $protocol . $host . $scriptPath;
         echo json_encode(["success" => true, "url" => $baseUrl . "/uploads/" . $fileName]);
     } else {
         http_response_code(500);
@@ -166,25 +170,40 @@ if ($action === 'send_contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = "Cef Medya - Yeni Iletisim Formu Mesaji";
     $body = "Gonderen: $name\nE-posta: $email\n\nMesaj:\n$message";
     
-    // NOT: "From" başlığı sunucunun kendi alan adı üzerinden olmalı (spam'a düşmemesi için)
-    // "Reply-To" ise gönderenin e-postası olmalı ki admin "Yanıtla" dediğinde ona gitsin.
-    $serverDomain = $_SERVER['SERVER_NAME'] ?? 'cefmedya.com';
-    if ($serverDomain === 'localhost' || $serverDomain === '127.0.0.1') {
-        $serverDomain = 'cefmedya.com';
-    }
-    
-    $headers = "From: noreply@$serverDomain\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    // PHPMailer Sınıflarını Dahil Et
+    require_once __DIR__ . '/phpmailer/Exception.php';
+    require_once __DIR__ . '/phpmailer/PHPMailer.php';
+    require_once __DIR__ . '/phpmailer/SMTP.php';
 
-    $mailSent = @mail($adminEmail, $subject, $body, $headers);
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
-    if ($mailSent) {
+    try {
+        // SMTP Ayarları
+        $mail->isSMTP();
+        $mail->Host       = $env['SMTP_HOST'] ?? 'mail.cefmedya.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $env['SMTP_USER'] ?? 'info@cefmedya.com';
+        $mail->Password   = $env['SMTP_PASS'] ?? '';
+        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS; // SSL
+        $mail->Port       = $env['SMTP_PORT'] ?? 465;
+        $mail->CharSet    = 'UTF-8';
+
+        // Gönderici ve Alıcı
+        $senderEmail = $env['SMTP_USER'] ?? 'info@cefmedya.com';
+        $mail->setFrom($senderEmail, 'Cef Medya Iletisim');
+        $mail->addAddress($adminEmail);
+        $mail->addReplyTo($email, $name);
+
+        // İçerik
+        $mail->isHTML(false);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+
+        $mail->send();
         echo json_encode(['success' => true, 'message' => 'Mesajınız başarıyla gönderildi.']);
-    } else {
-        // Mail fonksiyonu hata verirse bile, geliştirme ortamında çalışması için başarılı dönüyoruz veya hata basıyoruz.
-        // PHP mail() lokal sunucularda genelde çalışmaz, bu yüzden başarılıymış gibi simüle edilebilir.
-        echo json_encode(['success' => true, 'message' => 'Mesajınız başarıyla iletildi. (Mail simülasyonu)']);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Mail gönderilemedi. Hata: ' . $mail->ErrorInfo]);
     }
     exit;
 }
