@@ -6,3 +6,9 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
+# Güvenlik: .env ve gizli dosyalara erişimi engelle
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

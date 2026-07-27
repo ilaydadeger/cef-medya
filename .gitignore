@@ -1,4 +1,4 @@
-﻿# Logs
+# Logs
 logs
 *.log
 npm-debug.log*
@@ -39,3 +39,8 @@ data.json
 db_dump.json
 *.sqlite
 *.db
+
+# Cpanel and User uploads
+cpanel.env
+uploads/
+public/uploads/

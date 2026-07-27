@@ -1,30 +1,30 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import Home from './pages/frontend/Home';
-import Hizmetler from './pages/frontend/Hizmetler';
-import HizmetDetay from './pages/frontend/HizmetDetay';
-import Iletisim from './pages/frontend/Iletisim';
-import Portfolyo from './pages/frontend/Portfolyo';
-import PortfolyoDetay from './pages/frontend/PortfolyoDetay';
-import Takimimiz from './pages/frontend/Takimimiz';
-import Sss from './pages/frontend/Sss';
-import Hakkimizda from './pages/frontend/Hakkimizda';
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminLayout from './layouts/AdminLayout';
-import AdminSettings from './pages/admin/AdminSettings';
-import AdminHome from './pages/admin/AdminHome';
-import AdminAbout from './pages/admin/AdminAbout';
-import AdminServices from './pages/admin/AdminServices';
-import AdminTeam from './pages/admin/AdminTeam';
-import AdminFaq from './pages/admin/AdminFaq';
-import AdminPortfolio from './pages/admin/AdminPortfolio';
+import { Routes, Route, useLocation } from "react-router-dom"
+import { useEffect } from "react"
+import Home from "./pages/frontend/Home"
+import Hizmetler from "./pages/frontend/Hizmetler"
+import HizmetDetay from "./pages/frontend/HizmetDetay"
+import Iletisim from "./pages/frontend/Iletisim"
+import Portfolyo from "./pages/frontend/Portfolyo"
+import PortfolyoDetay from "./pages/frontend/PortfolyoDetay"
+import Takimimiz from "./pages/frontend/Takimimiz"
+import Sss from "./pages/frontend/Sss"
+import Hakkimizda from "./pages/frontend/Hakkimizda"
+import AdminLogin from "./pages/admin/AdminLogin"
+import AdminLayout from "./layouts/AdminLayout"
+import AdminSettings from "./pages/admin/AdminSettings"
+import AdminHome from "./pages/admin/AdminHome"
+import AdminAbout from "./pages/admin/AdminAbout"
+import AdminServices from "./pages/admin/AdminServices"
+import AdminTeam from "./pages/admin/AdminTeam"
+import AdminFaq from "./pages/admin/AdminFaq"
+import AdminPortfolio from "./pages/admin/AdminPortfolio"
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
 }
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
         </Route>
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

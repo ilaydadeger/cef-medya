@@ -1,23 +1,24 @@
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
-import { MediaRenderer } from '../../components/MediaRenderer';
-import { motion } from 'framer-motion';
-import { Camera, Film, MonitorPlay } from 'lucide-react';
-import { Navbar } from '../../components/Navbar';
-import { Footer } from '../../components/Footer';
-import { useCms } from '../../context/CmsContext';
+import { useDocumentTitle } from "../../hooks/useDocumentTitle"
+import { MediaRenderer } from "../../components/MediaRenderer"
+import { motion } from "framer-motion"
+import { Camera, Film, MonitorPlay } from "lucide-react"
+import { Navbar } from "../../components/Navbar"
+import { Footer } from "../../components/Footer"
+import { useCms } from "../../context/CmsContext"
 
 export default function Hakkimizda() {
-  useDocumentTitle('Hakkımızda');
+  useDocumentTitle("Hakkımızda")
 
-  const { data } = useCms();
-  const partners = data.aboutPage?.brands?.map((b, i) => ({ ...b, id: i })) || [];
+  const { data } = useCms()
+  const partners =
+    data.aboutPage?.brands?.map((b, i) => ({ ...b, id: i })) || []
 
-  const icons = [MonitorPlay, Camera, Film];
+  const icons = [MonitorPlay, Camera, Film]
   const values = data.about.values.map((val, idx) => ({
     title: val.title,
     desc: val.desc,
-    icon: icons[idx % icons.length]
-  }));
+    icon: icons[idx % icons.length],
+  }))
 
   return (
     <div className="bg-cef-black min-h-screen text-cef-cream selection:bg-cef-orange selection:text-white pb-24">
@@ -27,12 +28,16 @@ export default function Hakkimizda() {
       <section className="relative pt-52 pb-20 px-8 md:px-16 lg:px-32 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-cef-black via-cef-black/80 to-transparent z-10" />
-          <MediaRenderer            src={data.aboutPage?.heroBg || "https://images.unsplash.com/photo-1576280314550-773c50583407?auto=format&fit=crop&q=80&w=1920"}
+          <MediaRenderer
+            src={
+              data.aboutPage?.heroBg ||
+              "https://images.unsplash.com/photo-1576280314550-773c50583407?auto=format&fit=crop&q=80&w=1920"
+            }
             alt="Cinematic Behind the Scenes"
             className="w-full h-full object-cover opacity-50 scale-105"
           />
         </div>
-        
+
         <div className="relative z-20 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -41,7 +46,9 @@ export default function Hakkimizda() {
             className="flex flex-col gap-4"
           >
             <div className="text-xs tracking-[0.3em] text-cef-cream/50 uppercase mb-6">
-              <span className="hover:text-white cursor-pointer transition-colors">ANA SAYFA</span>
+              <span className="hover:text-white cursor-pointer transition-colors">
+                ANA SAYFA
+              </span>
               <span className="mx-2">/</span>
               <span className="text-cef-orange font-medium">HAKKIMIZDA</span>
             </div>
@@ -74,7 +81,7 @@ export default function Hakkimizda() {
               {data.about.mission}
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -91,7 +98,9 @@ export default function Hakkimizda() {
             <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-cef-black border border-white/10 flex items-center justify-center z-20">
               <div className="text-center">
                 <p className="text-4xl font-light text-cef-orange mb-1">10+</p>
-                <p className="text-xs tracking-widest text-white/50 uppercase">Yıllık Tecrübe</p>
+                <p className="text-xs tracking-widest text-white/50 uppercase">
+                  Yıllık Tecrübe
+                </p>
               </div>
             </div>
           </motion.div>
@@ -102,9 +111,9 @@ export default function Hakkimizda() {
       {data.aboutPage?.videoUrl && (
         <section className="px-8 md:px-16 lg:px-32 pb-20 flex justify-center mt-8">
           <div className="w-full max-w-4xl aspect-video bg-white/5 border border-white/10 rounded-2xl overflow-hidden relative shadow-2xl">
-            <video 
-              src={data.aboutPage.videoUrl} 
-              controls 
+            <video
+              src={data.aboutPage.videoUrl}
+              controls
               className="w-full h-full object-cover"
             />
           </div>
@@ -116,8 +125,15 @@ export default function Hakkimizda() {
         <div className="flex w-fit animate-marquee">
           <div className="flex gap-24 px-12 items-center">
             {partners.concat(partners).map((partner, i) => (
-              <div key={`${partner.id}-${i}`} className="w-40 h-20 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-500">
-                <MediaRenderer src={partner.image} alt={partner.name} className="max-w-full max-h-full object-contain brightness-0 invert" />
+              <div
+                key={`${partner.id}-${i}`}
+                className="w-40 h-20 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-500"
+              >
+                <MediaRenderer
+                  src={partner.image}
+                  alt={partner.name}
+                  className="max-w-full max-h-full object-contain brightness-0 invert"
+                />
               </div>
             ))}
           </div>
@@ -137,7 +153,8 @@ export default function Hakkimizda() {
             Video Fabrikası Yaklaşımı
           </h3>
           <p className="text-white/50 font-light leading-relaxed">
-            Sadece içerik üretmiyoruz. İhtiyacınız olan hikayeyi, doğru zamanda, en yüksek standartlarda ve mükemmel bir akışla kurguluyoruz.
+            Sadece içerik üretmiyoruz. İhtiyacınız olan hikayeyi, doğru zamanda,
+            en yüksek standartlarda ve mükemmel bir akışla kurguluyoruz.
           </p>
         </motion.div>
 
@@ -154,7 +171,9 @@ export default function Hakkimizda() {
               <div className="absolute top-8 text-cef-turquoise/30 group-hover:text-cef-turquoise/80 transition-colors duration-500">
                 <val.icon size={32} strokeWidth={1} />
               </div>
-              <h4 className="text-xl tracking-wider font-medium mt-4 mb-3 group-hover:text-cef-orange transition-colors duration-300">{val.title}</h4>
+              <h4 className="text-xl tracking-wider font-medium mt-4 mb-3 group-hover:text-cef-orange transition-colors duration-300">
+                {val.title}
+              </h4>
               <p className="text-sm text-white/40 leading-relaxed max-w-[200px]">
                 {val.desc}
               </p>
@@ -175,12 +194,14 @@ export default function Hakkimizda() {
               {/* Asymmetric offset frame */}
               <div className="absolute inset-0 border border-white/10 translate-x-4 -translate-y-4" />
               <MediaRenderer
-                src={data.aboutPage?.creativeApproach?.image} 
-                alt="Creative Approach" 
+                src={data.aboutPage?.creativeApproach?.image}
+                alt="Creative Approach"
                 className="w-full h-full object-cover transition-all duration-700 relative z-10"
               />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-cef-orange flex items-center justify-center rounded-full z-20">
-                <span className="text-white text-xs uppercase tracking-widest rotate-[-15deg] font-medium">Creative</span>
+                <span className="text-white text-xs uppercase tracking-widest rotate-[-15deg] font-medium">
+                  Creative
+                </span>
               </div>
             </div>
           </motion.div>
@@ -197,22 +218,20 @@ export default function Hakkimizda() {
                 YARATICI YAKLAŞIM
               </span>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-light leading-tight mb-8 whitespace-pre-line">
               {data.aboutPage?.creativeApproach?.title}
             </h2>
-            
+
             <div className="space-y-6 text-lg text-cef-cream/60 leading-relaxed font-light whitespace-pre-line">
-              <p>
-                {data.aboutPage?.creativeApproach?.desc}
-              </p>
+              <p>{data.aboutPage?.creativeApproach?.desc}</p>
             </div>
           </motion.div>
         </div>
       </section>
 
       <Footer />
-      
+
       {/* Adding a global marquee animation in a style tag for simplicity */}
       <style>{`
         @keyframes marquee {
@@ -224,5 +243,5 @@ export default function Hakkimizda() {
         }
       `}</style>
     </div>
-  );
+  )
 }

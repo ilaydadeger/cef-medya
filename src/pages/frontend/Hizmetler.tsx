@@ -1,37 +1,50 @@
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
-import { MediaRenderer } from '../../components/MediaRenderer';
-import { motion } from 'framer-motion';
-import { 
-  BookOpen, 
-  Share2, 
-  Fingerprint, 
-  Camera, 
-  Package, 
-  Gift, 
-  Box, 
-  PenTool, 
-  Coffee, 
-  Cuboid, 
-  Film, 
-  Monitor 
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Navbar } from '../../components/Navbar';
-import { Footer } from '../../components/Footer';
-import { useCms } from '../../context/CmsContext';
+import { useDocumentTitle } from "../../hooks/useDocumentTitle"
+import { MediaRenderer } from "../../components/MediaRenderer"
+import { motion } from "framer-motion"
+import {
+  BookOpen,
+  Share2,
+  Fingerprint,
+  Camera,
+  Package,
+  Gift,
+  Box,
+  PenTool,
+  Coffee,
+  Cuboid,
+  Film,
+  Monitor,
+} from "lucide-react"
+import { Link } from "react-router-dom"
+import { Navbar } from "../../components/Navbar"
+import { Footer } from "../../components/Footer"
+import { useCms } from "../../context/CmsContext"
 
 export default function Hizmetler() {
-  useDocumentTitle('Hizmetler');
+  useDocumentTitle("Hizmetler")
 
-  const { data } = useCms();
-  const ICONS = [BookOpen, Share2, Fingerprint, Camera, Package, Gift, Box, PenTool, Coffee, Cuboid, Film, Monitor];
+  const { data } = useCms()
+  const ICONS = [
+    BookOpen,
+    Share2,
+    Fingerprint,
+    Camera,
+    Package,
+    Gift,
+    Box,
+    PenTool,
+    Coffee,
+    Cuboid,
+    Film,
+    Monitor,
+  ]
   const servicesList = data.services.map((s, idx) => ({
     name: s.title,
     desc: s.desc,
-    icon: ICONS[idx % ICONS.length]
-  }));
+    icon: ICONS[idx % ICONS.length],
+  }))
 
-  const strengths = data.servicesPage?.strengths?.items || [];
+  const strengths = data.servicesPage?.strengths?.items || []
 
   return (
     <div className="bg-cef-black min-h-screen text-cef-cream selection:bg-cef-orange selection:text-white">
@@ -42,13 +55,14 @@ export default function Hizmetler() {
         {data.servicesPage?.heroBg && (
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-t from-cef-black via-cef-black/80 to-transparent z-10" />
-            <MediaRenderer              src={data.servicesPage.heroBg}
+            <MediaRenderer
+              src={data.servicesPage.heroBg}
               alt="Cinematic Services Background"
               className="w-full h-full object-cover opacity-50 scale-105"
             />
           </div>
         )}
-        
+
         <div className="relative z-20 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -57,7 +71,9 @@ export default function Hizmetler() {
             className="flex flex-col gap-4"
           >
             <div className="text-xs tracking-[0.3em] text-cef-cream/50 uppercase mb-6">
-              <span className="hover:text-white cursor-pointer transition-colors">ANA SAYFA</span>
+              <span className="hover:text-white cursor-pointer transition-colors">
+                ANA SAYFA
+              </span>
               <span className="mx-2">/</span>
               <span className="text-cef-orange font-medium">HİZMETLER</span>
             </div>
@@ -79,14 +95,16 @@ export default function Hizmetler() {
             className="flex flex-col gap-8"
           >
             <h2 className="text-3xl md:text-4xl font-light leading-tight whitespace-pre-line">
-              <span className="text-cef-orange font-medium block text-sm tracking-[0.2em] uppercase mb-4 uppercase">{data.servicesPage?.intro?.subtitle}</span>
+              <span className="text-cef-orange font-medium block text-sm tracking-[0.2em] uppercase mb-4 uppercase">
+                {data.servicesPage?.intro?.subtitle}
+              </span>
               {data.servicesPage?.intro?.title}
             </h2>
             <p className="text-lg text-cef-cream/60 leading-relaxed font-light whitespace-pre-line">
               {data.servicesPage?.intro?.desc}
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -112,7 +130,7 @@ export default function Hizmetler() {
       <section className="px-8 md:px-16 lg:px-32 py-32 bg-cef-black relative overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cef-turquoise/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cef-orange/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative z-10">
           {servicesList.map((service, idx) => (
             <motion.div
@@ -152,7 +170,9 @@ export default function Hizmetler() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-8 whitespace-pre-line">{data.servicesPage?.opportunities?.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-8 whitespace-pre-line">
+            {data.servicesPage?.opportunities?.title}
+          </h2>
           <p className="text-lg text-cef-cream/60 leading-relaxed font-light whitespace-pre-line">
             {data.servicesPage?.opportunities?.desc}
           </p>
@@ -167,22 +187,27 @@ export default function Hizmetler() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative h-[500px] w-full group cursor-pointer"
+            className="relative h-[500px] w-full group"
           >
-            <div className="absolute inset-0 bg-cef-black/40 group-hover:bg-cef-black/20 transition-all duration-500 z-10" />
+            {/* Sadece resim yüklendiyse sahte play ikonunu ve siyah kaplamayı göster */}
+            {!data.servicesPage?.surprise?.videoPlaceholder?.match(/\.(mp4|webm|ogg|mov)$/i) && (
+              <>
+                <div className="absolute inset-0 bg-cef-black/40 pointer-events-none transition-all duration-500 z-10" />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1" />
+                  </div>
+                </div>
+              </>
+            )}
+            
             <MediaRenderer
               src={data.servicesPage?.surprise?.videoPlaceholder}
               alt="Creative Behind The Scenes"
-              className="w-full h-full object-cover transition-all duration-700"
+              className="w-full h-full object-cover transition-all duration-700 relative z-30"
             />
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center z-20">
-              <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-cef-orange/90 group-hover:border-cef-orange transition-all duration-500">
-                <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1" />
-              </div>
-            </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -196,14 +221,17 @@ export default function Hizmetler() {
               <p className="mb-4">{data.servicesPage?.surprise?.desc1}</p>
               <p>{data.servicesPage?.surprise?.desc2}</p>
             </div>
-            
+
             <ul className="flex flex-col gap-5">
               {[
-                'Özgün ve Çarpıcı Kurgu',
-                'Marka Etkileşimini Güçlendirme',
-                'Sektöre Uygun Yaratıcı Çözümler'
+                "Özgün ve Çarpıcı Kurgu",
+                "Marka Etkileşimini Güçlendirme",
+                "Sektöre Uygun Yaratıcı Çözümler",
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-4 text-cef-cream/80 text-lg font-light">
+                <li
+                  key={i}
+                  className="flex items-center gap-4 text-cef-cream/80 text-lg font-light"
+                >
                   <span className="w-1.5 h-1.5 rounded-full bg-cef-orange" />
                   {item}
                 </li>
@@ -222,7 +250,9 @@ export default function Hizmetler() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-light whitespace-pre-line">{data.servicesPage?.strengths?.title}</h2>
+          <h2 className="text-4xl font-light whitespace-pre-line">
+            {data.servicesPage?.strengths?.title}
+          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -237,8 +267,8 @@ export default function Hizmetler() {
             >
               <div className="relative h-[400px] overflow-hidden rounded-sm mb-6">
                 <div className="absolute inset-0 bg-cef-black/40 z-10 group-hover:bg-transparent transition-all duration-500" />
-                  <MediaRenderer
-                  src={item.image} 
+                <MediaRenderer
+                  src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:-0 group-hover:scale-105 transition-all duration-700"
                 />
@@ -260,5 +290,5 @@ export default function Hizmetler() {
 
       <Footer />
     </div>
-  );
+  )
 }
