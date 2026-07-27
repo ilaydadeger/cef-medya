@@ -562,30 +562,67 @@ export default function AdminServices() {
             <div className="space-y-6">
               <div>
                 <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
-                  Başlık
+                  Küçük Başlık (Subtitle)
                 </label>
                 <input
                   type="text"
-                  value={servicesPageData?.opportunities?.title || ""}
+                  value={servicesPageData?.opportunities?.subtitle || ""}
                   onChange={(e) =>
-                    handleSectionChange(
-                      "opportunities",
-                      "title",
-                      e.target.value,
-                    )
+                    handleSectionChange("opportunities", "subtitle", e.target.value)
                   }
                   className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise"
                 />
               </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
+                    Büyük Başlık 1. Kısım
+                  </label>
+                  <input
+                    type="text"
+                    value={servicesPageData?.opportunities?.title1 || ""}
+                    onChange={(e) =>
+                      handleSectionChange("opportunities", "title1", e.target.value)
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
+                    Büyük Başlık 2. Kısım (İtalik)
+                  </label>
+                  <input
+                    type="text"
+                    value={servicesPageData?.opportunities?.title2 || ""}
+                    onChange={(e) =>
+                      handleSectionChange("opportunities", "title2", e.target.value)
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise"
+                  />
+                </div>
+              </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
-                  Açıklama
+                  Ana Açıklama Metni
                 </label>
                 <textarea
-                  rows={4}
-                  value={servicesPageData?.opportunities?.desc || ""}
+                  rows={2}
+                  value={servicesPageData?.opportunities?.desc1 || ""}
                   onChange={(e) =>
-                    handleSectionChange("opportunities", "desc", e.target.value)
+                    handleSectionChange("opportunities", "desc1", e.target.value)
+                  }
+                  className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise resize-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
+                  Alt Açıklama Metni
+                </label>
+                <textarea
+                  rows={2}
+                  value={servicesPageData?.opportunities?.desc2 || ""}
+                  onChange={(e) =>
+                    handleSectionChange("opportunities", "desc2", e.target.value)
                   }
                   className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise resize-none"
                 />

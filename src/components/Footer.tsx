@@ -96,9 +96,9 @@ export const Footer = () => {
               to="/"
               className="flex items-center gap-2 mb-6 w-fit hover:opacity-80 transition-opacity"
             >
-              {data.general.faviconUrl ? (
+              {data.general.logoUrl ? (
                 <MediaRenderer
-                  src={data.general.faviconUrl}
+                  src={data.general.logoUrl}
                   alt="Logo"
                   className="h-16 w-auto object-contain"
                 />

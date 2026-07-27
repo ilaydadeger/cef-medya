@@ -74,8 +74,10 @@ if ($action === 'cms' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $row = $stmt->fetch();
 
     if ($row) {
-        // Zaten JSON string, doğrudan bastırabiliriz
-        echo $row['setting_value'];
+        $json = $row['setting_value'];
+        $json = str_replace('\/v2\/uploads\/', '\/uploads\/', $json); // JSON escaped hali
+        $json = str_replace('/v2/uploads/', '/uploads/', $json);      // Normal hali
+        echo $json;
     } else {
         // Veri yoksa boş obje dön (veya frontend'deki initial state'i kullanacak)
         echo json_encode(null);

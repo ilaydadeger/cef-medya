@@ -114,9 +114,36 @@ export default function AdminSettings() {
                   className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-cef-turquoise transition-colors"
                 />
               </div>
-              <div className="md:col-span-2">
+              <div className="md:col-span-1">
                 <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
-                  Favicon Yükle
+                  Site Logosu Yükle
+                </label>
+                <div className="flex gap-4 items-center">
+                  {formData.general.logoUrl && (
+                    <MediaRenderer
+                      src={formData.general.logoUrl}
+                      alt="Site Logo"
+                      className="h-12 object-contain bg-white/10 rounded-md px-2"
+                    />
+                  )}
+                  <label className="cursor-pointer bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
+                    <Upload size={16} />
+                    <span>Dosya Seç</span>
+                    <input
+                      type="file"
+                      accept="image/*,video/mp4,video/webm"
+                      onChange={(e) =>
+                        handleFileUpload(e, ["general", "logoUrl"])
+                      }
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="md:col-span-1">
+                <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">
+                  Sekme İkonu (Favicon)
                 </label>
                 <div className="flex gap-4 items-center">
                   {formData.general.faviconUrl && (
@@ -138,11 +165,6 @@ export default function AdminSettings() {
                       className="hidden"
                     />
                   </label>
-                  {formData.general.faviconUrl && (
-                    <span className="text-xs text-white/50 truncate max-w-xs">
-                      {formData.general.faviconUrl}
-                    </span>
-                  )}
                 </div>
               </div>
             </div>

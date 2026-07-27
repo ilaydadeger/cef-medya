@@ -139,19 +139,20 @@ export default function Hizmetler() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="h-full"
             >
               <Link
                 to={`/hizmetler/${encodeURIComponent(data.services[idx].title)}`}
-                className="group border border-white/10 bg-white/[0.02] backdrop-blur-sm p-8 flex flex-col items-center text-center hover:bg-white/[0.05] hover:border-cef-orange/30 transition-all duration-500 cursor-pointer block"
+                className="h-full group border border-white/10 bg-white/[0.02] backdrop-blur-sm p-6 lg:p-8 flex flex-col items-center justify-center text-center hover:bg-white/[0.05] hover:border-cef-orange/30 transition-all duration-500 cursor-pointer block"
               >
-                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 text-cef-cream/70 group-hover:text-cef-orange group-hover:scale-110 transition-all duration-500">
-                  <service.icon size={28} strokeWidth={1.5} />
+                <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 lg:mb-6 text-cef-cream/70 group-hover:text-cef-orange group-hover:scale-110 transition-all duration-500 shrink-0">
+                  <service.icon size={26} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-medium tracking-wide mb-2 group-hover:text-white transition-colors">
+                <h3 className="text-base font-medium tracking-wide mb-2 group-hover:text-white transition-colors leading-tight">
                   {service.name}
                 </h3>
                 {service.desc && (
-                  <p className="text-xs text-white/50 group-hover:text-white/80 transition-colors mt-2">
+                  <p className="text-[0.7rem] text-white/50 group-hover:text-white/80 transition-colors mt-2">
                     {service.desc}
                   </p>
                 )}
@@ -161,22 +162,49 @@ export default function Hizmetler() {
         </div>
       </section>
 
-      {/* 4. Opportunities Section */}
-      <section className="px-8 md:px-16 lg:px-32 py-24 bg-gradient-to-b from-cef-black to-white/[0.02] border-t border-white/5 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-light mb-8 whitespace-pre-line">
-            {data.servicesPage?.opportunities?.title}
-          </h2>
-          <p className="text-lg text-cef-cream/60 leading-relaxed font-light whitespace-pre-line">
-            {data.servicesPage?.opportunities?.desc}
-          </p>
-        </motion.div>
+      {/* 4. Opportunities Section - Redesigned (Editorial & Luxury) */}
+      <section className="px-8 md:px-16 lg:px-32 py-32 bg-cef-black relative overflow-hidden border-t border-white/5">
+        {/* Decorative background element */}
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-cef-orange/5 rounded-full blur-[150px] -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cef-turquoise/5 rounded-full blur-[150px] pointer-events-none" />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5"
+          >
+            <div className="flex flex-col">
+              <span className="text-cef-turquoise text-xs tracking-[0.3em] uppercase mb-6 font-medium">
+                {data.servicesPage?.opportunities?.subtitle}
+              </span>
+              <h2 className="text-5xl md:text-7xl font-light leading-none tracking-tighter">
+                {data.servicesPage?.opportunities?.title1}<br />
+                <span className="italic text-white/40">{data.servicesPage?.opportunities?.title2}</span>
+              </h2>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7 relative"
+          >
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-cef-orange/50 to-transparent hidden lg:block" />
+            <div className="lg:pl-12 flex flex-col gap-8">
+              <p className="text-2xl md:text-3xl font-light text-cef-cream leading-snug whitespace-pre-line">
+                {data.servicesPage?.opportunities?.desc1}
+              </p>
+              <p className="text-lg text-cef-cream/50 leading-relaxed font-light whitespace-pre-line">
+                {data.servicesPage?.opportunities?.desc2}
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* 5. Creative Approach */}

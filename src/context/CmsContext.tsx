@@ -10,6 +10,7 @@ export interface CmsData {
   general: {
     siteTitle: string
     logoText: string
+    logoUrl: string
     faviconUrl: string
     contact: {
       address: string
@@ -87,8 +88,11 @@ export interface CmsData {
       img2: string
     }
     opportunities: {
-      title: string
-      desc: string
+      subtitle: string
+      title1: string
+      title2: string
+      desc1: string
+      desc2: string
     }
     surprise: {
       title: string
@@ -152,6 +156,7 @@ export const defaultCmsData: CmsData = {
   general: {
     siteTitle: "Cef Medya",
     logoText: "Cef Medya",
+    logoUrl: "",
     faviconUrl: "",
     contact: {
       address:
@@ -350,8 +355,11 @@ export const defaultCmsData: CmsData = {
       img2: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop",
     },
     opportunities: {
-      title: "Fırsatlar",
-      desc: "Sizlere, dijital baskı, logo tasarımı, katalog tasarımı, ürün çekimleri ve sosyal medya yönetimi gibi birçok farklı hizmeti entegre bir şekilde sunmanın avantajlarını sunuyoruz. Tek bir noktadan markanızın tüm görsel ve dijital ihtiyaçlarını karşılıyor, tutarlı ve etkili bir marka imajı inşa etmenizi sağlıyoruz.",
+      subtitle: "Avantajlarınız",
+      title1: "Bütünleşik",
+      title2: "Fırsatlar",
+      desc1: "Sizlere, dijital baskı, logo tasarımı, katalog tasarımı, ürün çekimleri ve sosyal medya yönetimi gibi birçok farklı hizmeti entegre bir şekilde sunmanın avantajlarını sunuyoruz.",
+      desc2: "Tek bir noktadan markanızın tüm görsel ve dijital ihtiyaçlarını karşılıyor, tutarlı ve etkili bir marka imajı inşa etmenizi sağlıyoruz. Karmaşık süreçleri basitleştirerek, doğrudan büyümenize odaklanmanız için alan yaratıyoruz.",
     },
     surprise: {
       title: "Sizleri şaşırtmayı seviyoruz",
@@ -613,7 +621,19 @@ interface CmsContextType {
 const CmsContext = createContext<CmsContextType | undefined>(undefined)
 
 export function CmsProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<CmsData>(defaultCmsData)
+  const [data, setData] = useState<CmsData>(() => {
+    const cached = localStorage.getItem("cef_cms_data")
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached)
+        // Basit bir ön yükleme (merge tam olarak fetch sonrasında da yapılacak)
+        return { ...defaultCmsData, ...parsed, general: { ...defaultCmsData.general, ...parsed.general } }
+      } catch (e) {
+        return defaultCmsData
+      }
+    }
+    return defaultCmsData
+  })
   const [isLoading, setIsLoading] = useState(true)
 
   // Load from MySQL via PHP API on mount
@@ -644,7 +664,9 @@ export function CmsProvider({ children }: { children: ReactNode }) {
             }
             return result
           }
-          setData(merge(defaultCmsData, fetchedData))
+          const mergedData = merge(defaultCmsData, fetchedData)
+          setData(mergedData)
+          localStorage.setItem("cef_cms_data", JSON.stringify(mergedData))
         }
       })
       .catch((err) => {
@@ -658,6 +680,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
   const updateData = async (newData: Partial<CmsData>) => {
     const nextData = { ...data, ...newData } as CmsData
     setData(nextData)
+    localStorage.setItem("cef_cms_data", JSON.stringify(nextData))
 
     // Save to MySQL via PHP API
     try {
@@ -696,8 +719,29 @@ export function CmsProvider({ children }: { children: ReactNode }) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-cef-black flex items-center justify-center text-cef-cream">
-        Yükleniyor...
+      <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center">
+        {data.general.faviconUrl ? (
+          <div className="relative w-24 h-24">
+            {/* Orijinal Görsel (Yarı saydam arkaplan) */}
+            <img 
+              src={data.general.faviconUrl} 
+              alt="Loading..." 
+              className="absolute inset-0 w-full h-full object-contain opacity-20"
+            />
+            {/* Beyaz Doldurma Animasyonu (Aşağıdan yukarıya) */}
+            <div className="absolute inset-0 w-full h-full animate-[fillUp_1.5s_ease-in-out_infinite]">
+              <img 
+                src={data.general.faviconUrl} 
+                alt="Loading..." 
+                className="w-full h-full object-contain brightness-0 invert"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="text-[#f4f2ee]/50 text-sm tracking-[0.2em] uppercase font-light animate-pulse">
+            Yükleniyor
+          </div>
+        )}
       </div>
     )
   }

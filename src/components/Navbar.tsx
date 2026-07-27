@@ -59,9 +59,9 @@ export const Navbar = () => {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          {data.general.faviconUrl ? (
+          {data.general.logoUrl ? (
             <img
-              src={data.general.faviconUrl}
+              src={data.general.logoUrl}
               alt="Cef Medya Logo"
               className="h-16 md:h-20 object-contain"
             />
